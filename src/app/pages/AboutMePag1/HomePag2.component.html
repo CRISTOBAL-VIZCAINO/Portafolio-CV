@@ -5,23 +5,37 @@
         </h1>
     </div>
 
-    <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4 mb-12 w-full">
-        <button class="w-full sm:w-64 py-3 bg-white text-black border-2 border-black rounded-lg hover:bg-gray-100 transition duration-300 ease-in-out" (click)="scrollToProjects()">Ver Proyectos</button>
-        <button (click)="downloadCV()" class="w-full sm:w-64 py-3 bg-transparent text-white border-2 border-white rounded-lg hover:bg-white hover:text-black transition duration-300 ease-in-out">Descargar CV</button>
+    <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6 mb-12 w-full">
+        <button class="w-full sm:w-64 py-3 px-6 bg-gradient-to-r from-blue-600 to-blue-800 text-white rounded-xl hover:from-blue-700 hover:to-blue-900 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 active:translate-y-0 active:shadow-lg active:bg-blue-800 active:from-blue-600 active:to-blue-800 cursor-pointer" (click)="scrollToProjects()">
+            <span class="flex items-center justify-center">
+                Ver Proyectos
+                <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+            </span>
+        </button>
+        <button class="w-full sm:w-64 py-3 px-6 bg-white text-blue-600 border-2 border-blue-600 rounded-xl hover:bg-blue-50 hover:text-blue-700 hover:border-blue-700 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 active:translate-y-0 active:shadow-lg active:bg-blue-50 active:text-blue-600 active:border-blue-600 cursor-pointer" (click)="downloadCV()">
+            <span class="flex items-center justify-center">
+                Descargar CV
+                <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                </svg>
+            </span>
+        </button>
     </div>
 
-    <div class="flex flex-col items-center mb-12">
-        <div class="w-full max-w-md aspect-square overflow-hidden mb-8 flex justify-center">
-            <img src="cristobalFOTOIA.png" alt="Cristóbal Vizcaíno" class="w-full h-full object-cover object-top rounded-xl shadow-lg transform transition-transform duration-300 hover:scale-105">
+    <div class="flex flex-col sm:flex-row items-center justify-center mb-12 bg-gray-800 rounded-2xl overflow-hidden">
+        <div class="w-full sm:w-1/3 max-w-md aspect-square overflow-hidden mb-8 sm:mb-0 sm:mr-8 flex justify-center">
+            <img src="cristobalFOTOIA.png" alt="Cristóbal Vizcaíno" class="w-full h-full object-cover object-top rounded-none sm:rounded-l-xl shadow-lg transform transition-transform duration-300 hover:scale-105">
         </div>
 
-        <div class="max-w-4xl w-full px-4">
-            <h2 class="text-2xl sm:text-3xl font-bold text-center text-white mb-6 pb-3 rounded-lg">Acerca de mí</h2>
-            <p class="text-base sm:text-lg text-white font-medium leading-relaxed text-justify bg-gray-800 p-4 sm:p-6 rounded-lg">
-                ¡Hola! Soy Cristóbal Vizcaíno, desarrollador web con más de 2 años de experiencia, apasionado por el trabajo en equipo y la creación de soluciones digitales que conecten con las personas. Me especializo en construir aplicaciones web escalables, optimizadas y de alto rendimiento con Angular (v10–19), TypeScript, HTML5 y CSS3 (Tailwind CSS, Bootstrap, DaisyUI). <br><br>
-
-                Disfruto diseñar experiencias interactivas, intuitivas y accesibles, donde cada línea de código aporte valor y emoción al usuario final. Como Frontend Architect, busco que cada aplicación no solo cumpla su función, sino que genere sensaciones positivas: fluidez, confianza y satisfacción. Trabajo constantemente en mejorar mis habilidades, aplicando buenas prácticas y estándares de calidad para lograr soluciones eficientes y sostenibles a largo plazo.
-            </p>
+        <div class="w-full sm:w-2/3 max-w-4xl px-4 sm:px-8 py-6 sm:py-8">
+            <h2 class="text-2xl sm:text-3xl font-bold text-center sm:text-left text-white mb-4 sm:mb-6">Acerca de mí</h2>
+            <div class="bg-white/5 rounded-xl p-4 sm:p-6">
+                <p class="text-base sm:text-lg text-white font-medium leading-relaxed text-justify">
+                  Soy Desarrollador Web con más de 2 años de experiencia, especializado en la creación de aplicaciones web escalables, optimizadas y de alto rendimiento utilizando Angular (versiones 10–19). Estoy en constante búsqueda de mejorar mis habilidades para ofrecer soluciones eficientes que garanticen una experiencia de usuario fluida e intuitiva. Me esfuerzo por aplicar las mejores prácticas de desarrollo y mantener altos estándares de calidad en el código, asegurando aplicaciones que sean de alto rendimiento, escalables y fáciles de mantener a largo plazo.
+                </p>
+            </div>
         </div>
     </div>
 
@@ -184,38 +198,66 @@
     </div>
 
 
-    <div #proyectosSection class="py-16">
-        <h2 class="text-2xl sm:text-3xl font-bold text-center text-white mb-12 pb-3 rounded-lg">Algunos de mis proyectos</h2>
+    <div #proyectosSection class="py-24">
+        <h2 class="text-3xl sm:text-4xl font-bold text-center text-white mb-16">Algunos de mis proyectos</h2>
 
-        <section class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto px-4">
-            <div class="bg-gray-800 rounded-2xl shadow-lg overflow-hidden group">
-                <div class="relative w-full h-64 overflow-hidden">
-                    <img src="gifs.png" alt="Gif Generator Project" class="absolute inset-0 w-full h-full object-contain">
+        <section class="grid grid-cols-1 gap-12 max-w-7xl mx-auto px-4">
+            <!-- Gif Generator -->
+            <div class="bg-gray-800 rounded-2xl shadow-lg group">
+                <div class="relative w-full aspect-video overflow-hidden">
+                    <img src="gifs.png" alt="Gif Generator Project" class="absolute inset-0 w-full h-full object-contain transition-transform duration-300 group-hover:scale-105">
                 </div>
-                <div class="p-6 bg-gray-700">
-                    <h3 class="text-xl font-semibold text-white mb-2 group-hover:text-blue-300 transition">Gif Generator</h3>
-                    <p class="text-gray-300 text-sm">Aplicación de búsqueda de gifs utilizando API de Giphy con Angular.</p>
-                </div>
-            </div>
-            <div class="bg-gray-800 rounded-2xl shadow-lg overflow-hidden group">
-                <div class="relative w-full h-64 overflow-hidden">
-                    <img src="paises.png" alt="Country Information App" class="absolute inset-0 w-full h-full object-contain">
-                </div>
-                <div class="p-6 bg-gray-700">
-                    <h3 class="text-xl font-semibold text-white mb-2 group-hover:text-blue-300 transition">Country Explorer</h3>
-                    <p class="text-gray-300 text-sm">Aplicación de información de países con búsqueda y filtrado avanzado.</p>
+                <div class="p-8 bg-gray-700">
+                    <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">Gif Generator</h3>
+                    <p class="text-gray-300 text-base leading-relaxed">Aplicación de búsqueda de gifs utilizando API de Giphy con Angular.</p>
+                    <div class="mt-4 flex space-x-2">
+                        <span class="px-3 py-1 bg-blue-500 text-white rounded-full text-xs font-medium">Angular</span>
+                        <span class="px-3 py-1 bg-green-500 text-white rounded-full text-xs font-medium">API</span>
+                    </div>
                 </div>
             </div>
-            <div class="bg-gray-800 rounded-2xl shadow-lg overflow-hidden group">
-                <div class="relative w-full h-64 overflow-hidden">
-                    <img src="Teslop shop.png" alt="Tesla Shop Clone" class="absolute inset-0 w-full h-full object-contain">
+
+            <!-- Country Explorer -->
+            <div class="bg-gray-800 rounded-2xl shadow-lg group">
+                <div class="relative w-full aspect-video overflow-hidden">
+                    <img src="paises.png" alt="Country Information App" class="absolute inset-0 w-full h-full object-contain transition-transform duration-300 group-hover:scale-105">
                 </div>
-                <div class="p-6 bg-gray-700">
-                    <h3 class="text-xl font-semibold text-white mb-2 group-hover:text-blue-300 transition">Tesla Shop Clone</h3>
-                    <p class="text-gray-300 text-sm">Réplica de tienda en línea de Tesla con carrito de compras y autenticación.</p>
+                <div class="p-8 bg-gray-700">
+                    <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">Country Explorer</h3>
+                    <p class="text-gray-300 text-base leading-relaxed">Aplicación de información de países con búsqueda y filtrado avanzado.</p>
+                    <div class="mt-4 flex space-x-2">
+                        <span class="px-3 py-1 bg-blue-500 text-white rounded-full text-xs font-medium">Angular</span>
+                        <span class="px-3 py-1 bg-green-500 text-white rounded-full text-xs font-medium">REST</span>
+                    </div>
                 </div>
             </div>
-            <button (click)="navigateToAboutMe()" class="w-full sm:w-64 py-3 bg-white text-black border-2 border-black rounded-lg hover:bg-gray-100 transition duration-300 ease-in-out">Ver mas proyectos...</button>
+
+            <!-- Tesla Shop -->
+            <div class="bg-gray-800 rounded-2xl shadow-lg group">
+                <div class="relative w-full aspect-video overflow-hidden">
+                    <img src="Teslop shop.png" alt="Tesla Shop Clone" class="absolute inset-0 w-full h-full object-contain transition-transform duration-300 group-hover:scale-105">
+                </div>
+                <div class="p-8 bg-gray-700">
+                    <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">Tesla Shop Clone</h3>
+                    <p class="text-gray-300 text-base leading-relaxed">Réplica de tienda en línea de Tesla con carrito de compras y autenticación.</p>
+                    <div class="mt-4 flex space-x-2">
+                        <span class="px-3 py-1 bg-blue-500 text-white rounded-full text-xs font-medium">Angular</span>
+                        <span class="px-3 py-1 bg-green-500 text-white rounded-full text-xs font-medium">Firebase</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botón Ver más -->
+            <div class="w-full">
+                <button (click)="navigateToAboutMe()" class="w-full sm:w-64 py-4 px-6 bg-gradient-to-r from-blue-600 to-blue-800 text-white rounded-xl hover:from-blue-700 hover:to-blue-900 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 active:translate-y-0 active:shadow-lg active:bg-blue-800 active:from-blue-600 active:to-blue-800 cursor-pointer">
+                    <span class="flex items-center justify-center">
+                        Ver mas proyectos...
+                        <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </span>
+                </button>
+            </div>
         </section>
     </div>
 

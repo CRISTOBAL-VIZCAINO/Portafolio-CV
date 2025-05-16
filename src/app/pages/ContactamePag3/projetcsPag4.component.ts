@@ -28,6 +28,7 @@ export default class ProjetcsPag4Component {
 
   onSubmit() {
     if (this.contactForm.invalid) {
+      alert('Por favor, completa todos los campos requeridos.');
       return;
     }
 

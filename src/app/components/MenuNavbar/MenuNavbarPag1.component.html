@@ -1,9 +1,41 @@
-<div class="navbar bg-gray-50 shadow-sm mb-5 text-gray-900 relative flex items-center justify-between px-4 sm:px-6 lg:px-8">
+<div class="navbar bg-white shadow-lg mb-8 text-gray-900 relative flex items-center justify-between px-4 sm:px-6 lg:px-8 h-20 md:h-32">
   <div class="flex-1 flex justify-center">
-    <a class="btn btn-ghost text-base sm:text-xl md:text-2xl lg:text-3xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-green-500 to-blue-500 hover:from-green-500 hover:via-blue-500 hover:to-green-500 transition-colors duration-300">Cristóbal Vizcaíno M</a>
+    <a class="btn btn-ghost text-base sm:text-xl md:text-3xl lg:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-green-500 to-blue-500 hover:from-green-500 hover:via-blue-500 hover:to-green-500 transition-colors duration-300">
+      <span class="bg-gradient-to-r from-blue-500 via-green-500 to-blue-500 bg-clip-text text-transparent">Cristóbal Vizcaíno M</span>
+    </a>
   </div>
   
-  <div class="absolute right-4 sm:right-6 lg:right-8">
+  <div class="hidden sm:flex items-center space-x-8">
+    <a routerLink="/menuNavbar/aboutMePag1" class="text-gray-600 hover:text-gray-900 hover:bg-gray-50 px-6 py-4 rounded-xl text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg hover:text-gray-900 hover:bg-white">
+      <span class="flex items-center justify-center">
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M6 16h2v4H6v-4zm3.172-7l1.83 1.83a1.414 1.414 0 01-2.122 0L8.83 8.83zM11.67 6.83l1.83-1.83a1.414 1.414 0 012.122 0L16.17 8.83a1.414 1.414 0 010 2.122l-1.83 1.83a1.414 1.414 0 01-2.122 0L11.67 11.17a1.414 1.414 0 010-2.122z"/>
+        </svg>
+        Acerca de mí
+      </span>
+    </a>
+    <a routerLink="/menuNavbar/proyectsPag2" class="text-gray-600 hover:text-gray-900 hover:bg-gray-50 px-6 py-4 rounded-xl text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg hover:text-gray-900 hover:bg-white">
+      <span class="flex items-center justify-center">
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+        </svg>
+        Proyectos
+      </span>
+    </a>
+    <a routerLink="/menuNavbar/contactPag3" class="text-gray-600 hover:text-gray-900 hover:bg-gray-50 px-6 py-4 rounded-xl text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg hover:text-gray-900 hover:bg-white">
+      <span class="flex items-center justify-center">
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+        </svg>
+        Contactame
+      </span>
+    </a>
+  </div>
+
+  <!-- menu movil -->
+
+
+  <div class="sm:hidden">
     <div class="dropdown dropdown-end">
       <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -12,16 +44,16 @@
       </div>
       <ul
         tabindex="0"
-        class="menu menu-sm dropdown-content bg-gray-50 rounded-box z-50 mt-3 w-52 p-2 shadow">
-        <li><a routerLink="/menuNavbar/aboutMePag1" class="hover:bg-gray-200 transition duration-300">Acerca de mí</a></li>
-        <li><a routerLink="/menuNavbar/proyectsPag2" class="hover:bg-gray-200 transition duration-300">Proyectos</a></li>
-        <li><a routerLink="/menuNavbar/contactPag3" class="hover:bg-gray-200 transition duration-300">Contactame</a></li>
+        class="menu menu-sm dropdown-content bg-white rounded-box z-50 mt-3 w-52 shadow-lg">
+        <li><a routerLink="/menuNavbar/aboutMePag1" class="hover:bg-gray-50 transition-colors duration-300">Acerca de mí</a></li>
+        <li><a routerLink="/menuNavbar/proyectsPag2" class="hover:bg-gray-50 transition-colors duration-300">Proyectos</a></li>
+        <li><a routerLink="/menuNavbar/contactPag3" class="hover:bg-gray-50 transition-colors duration-300">Contactame</a></li>
       </ul>
     </div>
   </div>
 </div>
 
-
-<div>
+<div class="pt-16">
   <router-outlet/>
 </div>
+<!-- menu desktop -->
