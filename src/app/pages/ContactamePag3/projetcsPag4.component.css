@@ -1,3 +1,32 @@
 :host {
   display: block;
 }
+
+.contact-form {
+  @apply max-w-2xl mx-auto my-12 px-6;
+}
+
+@media (max-width: 640px) {
+  .contact-form {
+    @apply p-4 my-8;
+  }
+  
+  .contact-form input,
+  .contact-form textarea {
+    @apply px-3 py-2;
+  }
+  
+  .contact-form button {
+    @apply py-2;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-form h2 {
+    @apply text-2xl;
+  }
+  
+  .contact-form p {
+    @apply text-xs;
+  }
+}
