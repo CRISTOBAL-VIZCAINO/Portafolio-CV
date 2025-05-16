@@ -1,0 +1,8 @@
+:host {
+  display: block;
+}
+
+.name-highlight {
+  color: #007bff; /* You can change this to any color you prefer */
+  font-weight: bold;
+}

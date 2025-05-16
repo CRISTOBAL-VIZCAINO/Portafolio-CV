@@ -1,0 +1,27 @@
+:host {
+  display: block;
+}
+
+.carousel {
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  -ms-scroll-chaining: none;
+  overscroll-behavior: contain;
+  scroll-behavior: smooth;
+}
+
+.carousel-item {
+  scroll-snap-align: center;
+  user-select: none;
+  -webkit-user-drag: none;
+  -ms-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.carousel-item img {
+  cursor: grab;
+}
+
+.carousel-item img:active {
+  cursor: grabbing;
+}
