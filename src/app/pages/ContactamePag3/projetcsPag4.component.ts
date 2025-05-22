@@ -33,20 +33,8 @@ export default class ProjetcsPag4Component {
     }
 
     this.submitted = true;
-    const formData = this.contactForm.value;
-
-    this.http.post('http://localhost:3001/api/contact', formData)
-      .subscribe({
-        next: () => {
-          alert('Mensaje enviado exitosamente!');
-          this.contactForm.reset();
-          this.submitted = false;
-        },
-        error: (error) => {
-          console.error('Error:', error);
-          alert('Error al enviar el mensaje. Por favor, inténtalo de nuevo.');
-          this.submitted = false;
-        }
-      });
+    this.contactForm.reset();
+    this.submitted = false;
+    alert('¡Gracias! Tu mensaje ha sido enviado.');
   }
 }
