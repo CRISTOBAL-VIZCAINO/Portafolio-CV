@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FooterPagesComponent } from "../../components/footerPages/footerPages.component";
+import { UserService } from '../../services/conectBack.service';
+import { User } from '../../interfaces/requisitos.interface';
 
 @Component({
   selector: 'app-projetcs-pag4',
@@ -17,7 +19,7 @@ export default class ProjetcsPag4Component {
 
   constructor(
     private fb: FormBuilder,
-    private http: HttpClient
+    private userService: UserService
   ) {
     this.contactForm = this.fb.group({
       name: ['', Validators.required],
@@ -32,9 +34,23 @@ export default class ProjetcsPag4Component {
       return;
     }
 
-    this.submitted = true;
-    this.contactForm.reset();
-    this.submitted = false;
-    alert('¡Gracias! Tu mensaje ha sido enviado.');
+    const user: User = {
+      user_name: this.contactForm.value.name,
+      email_address: this.contactForm.value.email,
+      user_message: this.contactForm.value.message
+    };
+
+    this.userService.createUser(user).subscribe({
+      next: (res) => {
+        this.submitted = true;
+        this.contactForm.reset();
+        this.submitted = false;
+        alert('¡Gracias! Tu mensaje ha sido enviado.');
+      },
+      error: (err) => {
+        console.log(err);
+        alert('Ocurrió un error al enviar el mensaje. Intenta nuevamente.');
+      }
+    });
   }
 }
