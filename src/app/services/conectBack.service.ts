@@ -9,7 +9,7 @@ import { User } from '../interfaces/requisitos.interface';
 export class UserService {
   private apiUrl = 'http://localhost:3000/api/users';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   // Obtener todos los usuarios
   getAllUsers(): Observable<User[]> {

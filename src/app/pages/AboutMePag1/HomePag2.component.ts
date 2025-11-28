@@ -30,8 +30,8 @@ export default class HomePag2Component {
 
   downloadCV() {
     const link = document.createElement('a');
-    link.href = 'Cristobal_Vizcaino_CV-F.docx';
-    link.download = 'Cristobal_Vizcaino_CV-F.docx';
+    link.href = 'Cristobal_Vizcaino_CV-FWEB-ES-Final.docx';
+    link.download = 'Cristobal_Vizcaino_CV-FWEB-ES-Final.docx';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
