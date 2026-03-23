@@ -1,38 +1,27 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { User } from '../interfaces/requisitos.interface';
+import { createClient, SupabaseClient } from '@supabase/supabase-js';
+import { environment } from '../environments/environment';
+import { ContactMessage, ContactMessageInsert } from '../interfaces/requisitos.interface';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
-  private apiUrl = 'http://localhost:3000/api/users';
+export class ContactService {
+  private supabase: SupabaseClient;
+  private readonly TABLE = 'contact_messages';
 
-  constructor(private http: HttpClient) {}
-
-  // Obtener todos los usuarios
-  getAllUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.apiUrl);
+  constructor() {
+    this.supabase = createClient(
+      environment.supabase.url,
+      environment.supabase.anonKey
+    );
   }
 
-  // Crear un nuevo usuario
-  createUser(user: User): Observable<User> {
-    return this.http.post<User>(this.apiUrl, user);
-  }
+  async sendMessage(payload: ContactMessageInsert): Promise<void> {
+    const { error } = await this.supabase
+      .from(this.TABLE)
+      .insert(payload);
 
-  // Opcional: Obtener un usuario por ID
-  getUserById(id: number): Observable<User> {
-    return this.http.get<User>(`${this.apiUrl}/${id}`);
-  }
-
-  // Opcional: Actualizar un usuario
-  updateUser(user: User): Observable<User> {
-    return this.http.put<User>(`${this.apiUrl}/${user.id}`, user);
-  }
-
-  // Opcional: Eliminar un usuario
-  deleteUser(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    if (error) throw error;
   }
 }

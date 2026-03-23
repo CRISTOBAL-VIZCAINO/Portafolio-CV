@@ -5,41 +5,95 @@
       Si estás interesado en mi trabajo o tienes alguna inquietud, no dudes en escribirme!
     </p>
 
-    <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="space-y-8 p-8" 
-      name="contact-form" 
-      data-netlify="true"
-      
-      data-netlify-honeypot="bot-field"
-      netlify>
-      <!-- Nombre y Email en dos columnas para desktop -->
+    <!-- Feedback -->
+    @if (feedbackMessage) {
+      <div class="mx-8 mb-6 px-6 py-4 rounded-lg text-center font-medium border transition-all duration-300"
+        [class.bg-green-500]="feedbackType === 'success'"
+        [class.text-green-400]="feedbackType === 'success'"
+        [class.border-green-500]="feedbackType === 'success'"
+        [class.bg-red-500]="feedbackType === 'error'"
+        [class.text-red-400]="feedbackType === 'error'"
+        [class.border-red-500]="feedbackType === 'error'">
+        {{ feedbackMessage }}
+      </div>
+    }
+
+    <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="space-y-6 p-8">
+
+      <!-- Nombre y Email -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="space-y-3">
-          <label class="block text-sm sm:text-base mb-1 text-gray-300">Tu nombre</label>
-          <input type="text" formControlName="name" placeholder="Nombre" class="w-full px-6 py-4 sm:py-5 rounded-lg bg-[#1f1f1f] text-white border border-gray-600 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-50 focus:border-green-400 transition duration-200 cursor-text">
+        <div class="space-y-2">
+          <label class="block text-sm sm:text-base text-gray-300">Nombre completo <span class="text-red-400">*</span></label>
+          <input type="text" formControlName="full_name" placeholder="Tu nombre completo"
+            class="w-full px-6 py-4 rounded-lg bg-[#1f1f1f] text-white border border-gray-600 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-50 focus:border-green-400 transition duration-200 cursor-text">
+          @if (contactForm.get('full_name')?.touched && contactForm.get('full_name')?.hasError('required')) {
+            <p class="text-red-400 text-xs mt-1">El nombre es requerido.</p>
+          }
         </div>
 
-        <div class="space-y-3">
-          <label class="block text-sm sm:text-base mb-1 text-gray-300">Tu E-mail</label>
-          <input type="email" formControlName="email" placeholder="Ejemplo@hotmail.com" class="w-full px-6 py-4 sm:py-5 rounded-lg bg-[#1f1f1f] text-white border border-gray-600 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-50 focus:border-green-400 transition duration-200 cursor-text">
+        <div class="space-y-2">
+          <label class="block text-sm sm:text-base text-gray-300">E-mail <span class="text-red-400">*</span></label>
+          <input type="email" formControlName="email" placeholder="ejemplo&#64;correo.com"
+            class="w-full px-6 py-4 rounded-lg bg-[#1f1f1f] text-white border border-gray-600 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-50 focus:border-green-400 transition duration-200 cursor-text">
+          @if (contactForm.get('email')?.touched && contactForm.get('email')?.hasError('required')) {
+            <p class="text-red-400 text-xs mt-1">El email es requerido.</p>
+          }
+          @if (contactForm.get('email')?.touched && contactForm.get('email')?.hasError('email')) {
+            <p class="text-red-400 text-xs mt-1">Ingresa un email válido.</p>
+          }
         </div>
       </div>
 
-      <!-- Mensaje en una sola columna -->
-      <!-- Campo oculto para detección de spam -->
-      <input type="hidden" name="bot-field" />
-      <input type="text" name="form-name" value="contact-form" class="hidden" />
+      <!-- Empresa y Teléfono (opcionales) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="space-y-2">
+          <label class="block text-sm sm:text-base text-gray-300">Empresa <span class="text-gray-500 text-xs">(opcional)</span></label>
+          <input type="text" formControlName="company" placeholder="Nombre de tu empresa"
+            class="w-full px-6 py-4 rounded-lg bg-[#1f1f1f] text-white border border-gray-600 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-50 focus:border-green-400 transition duration-200 cursor-text">
+        </div>
 
-      <div class="space-y-3">
-        <label class="block text-sm sm:text-base mb-1 text-gray-300">Tu mensaje</label>
-        <textarea formControlName="message" name="message" rows="6" placeholder="Hey..." class="w-full px-6 py-4 sm:py-5 rounded-lg bg-[#1f1f1f] text-white border border-gray-600 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-50 focus:border-green-400 transition duration-200 cursor-text"></textarea>
+        <div class="space-y-2">
+          <label class="block text-sm sm:text-base text-gray-300">Teléfono <span class="text-gray-500 text-xs">(opcional)</span></label>
+          <input type="tel" formControlName="phone" placeholder="+57 300 000 0000"
+            class="w-full px-6 py-4 rounded-lg bg-[#1f1f1f] text-white border border-gray-600 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-50 focus:border-green-400 transition duration-200 cursor-text">
+        </div>
       </div>
 
-      <!-- Botón centralizado -->
-      <div class="flex justify-center">
-        <button type="submit" [disabled]="!contactForm.valid" class="w-full sm:w-auto px-8 py-4 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed">
-          <span class="relative z-10">Enviar</span>
+      <!-- Asunto -->
+      <div class="space-y-2">
+        <label class="block text-sm sm:text-base text-gray-300">Asunto <span class="text-red-400">*</span></label>
+        <input type="text" formControlName="subject" placeholder="¿Sobre qué quieres hablar?"
+          class="w-full px-6 py-4 rounded-lg bg-[#1f1f1f] text-white border border-gray-600 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-50 focus:border-green-400 transition duration-200 cursor-text">
+        @if (contactForm.get('subject')?.touched && contactForm.get('subject')?.hasError('required')) {
+          <p class="text-red-400 text-xs mt-1">El asunto es requerido.</p>
+        }
+      </div>
+
+      <!-- Mensaje -->
+      <div class="space-y-2">
+        <label class="block text-sm sm:text-base text-gray-300">Mensaje <span class="text-red-400">*</span></label>
+        <textarea formControlName="message" rows="6" placeholder="Cuéntame más sobre tu proyecto o consulta..."
+          class="w-full px-6 py-4 rounded-lg bg-[#1f1f1f] text-white border border-gray-600 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-50 focus:border-green-400 transition duration-200 cursor-text resize-y"></textarea>
+        @if (contactForm.get('message')?.touched && contactForm.get('message')?.hasError('required')) {
+          <p class="text-red-400 text-xs mt-1">El mensaje es requerido.</p>
+        }
+      </div>
+
+      <!-- Botón -->
+      <div class="flex justify-center pt-2">
+        <button type="submit"
+          [disabled]="contactForm.invalid || sending"
+          class="w-full sm:w-auto px-10 py-4 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer">
+          @if (sending) {
+            <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+            </svg>
+          }
+          <span>{{ sending ? 'Enviando...' : 'Enviar mensaje' }}</span>
         </button>
       </div>
     </form>
   </section>
   <footer-pages></footer-pages>
+</div>

@@ -1,11 +1,8 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
-import { FooterPagesComponent } from "../../components/footerPages/footerPages.component";
-import { UserService } from '../../services/conectBack.service';
-import { User } from '../../interfaces/requisitos.interface';
-
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FooterPagesComponent } from '../../components/footerPages/footerPages.component';
+import { ContactService } from '../../services/conectBack.service';
+import { ContactMessageInsert } from '../../interfaces/requisitos.interface';
 @Component({
   selector: 'app-projetcs-pag4',
   imports: [FooterPagesComponent, ReactiveFormsModule],
@@ -15,42 +12,57 @@ import { User } from '../../interfaces/requisitos.interface';
 })
 export default class ProjetcsPag4Component {
   contactForm: FormGroup;
-  submitted = false;
+  sending = false;
+  feedbackMessage = '';
+  feedbackType: 'success' | 'error' | '' = '';
 
   constructor(
     private fb: FormBuilder,
-    private userService: UserService
+    private contactService: ContactService,
+    private cdr: ChangeDetectorRef
   ) {
     this.contactForm = this.fb.group({
-      name: ['', Validators.required],
+      full_name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
+      company: [''],
+      phone: [''],
+      subject: ['', Validators.required],
       message: ['', Validators.required]
     });
   }
 
-  onSubmit() {
+  async onSubmit() {
     if (this.contactForm.invalid) {
-      alert('Por favor, completa todos los campos requeridos.');
+      this.contactForm.markAllAsTouched();
       return;
     }
 
-    const user: User = {
-      user_name: this.contactForm.value.name,
-      email_address: this.contactForm.value.email,
-      user_message: this.contactForm.value.message
+    this.sending = true;
+    this.feedbackMessage = '';
+    this.feedbackType = '';
+    this.cdr.markForCheck();
+
+    const payload: ContactMessageInsert = {
+      full_name: this.contactForm.value.full_name.trim(),
+      email: this.contactForm.value.email.trim().toLowerCase(),
+      company: this.contactForm.value.company?.trim() || null,
+      phone: this.contactForm.value.phone?.trim() || null,
+      subject: this.contactForm.value.subject.trim(),
+      message: this.contactForm.value.message.trim()
     };
 
-    this.userService.createUser(user).subscribe({
-      next: (res) => {
-        this.submitted = true;
-        this.contactForm.reset();
-        this.submitted = false;
-        alert('¡Gracias! Tu mensaje ha sido enviado.');
-      },
-      error: (err) => {
-        console.log(err);
-        alert('Ocurrió un error al enviar el mensaje. Intenta nuevamente.');
-      }
-    });
+    try {
+      await this.contactService.sendMessage(payload);
+      this.feedbackType = 'success';
+      this.feedbackMessage = '¡Gracias! Tu mensaje ha sido enviado correctamente.';
+      this.contactForm.reset();
+    } catch (err) {
+      console.error('Error al enviar mensaje:', err);
+      this.feedbackType = 'error';
+      this.feedbackMessage = 'Ocurrió un error al enviar el mensaje. Intenta nuevamente.';
+    } finally {
+      this.sending = false;
+      this.cdr.markForCheck();
+    }
   }
 }
