@@ -42,11 +42,12 @@
       <!-- Contacto y redes -->
       <div>
         <p class="text-sm font-semibold uppercase tracking-wider text-white">Conéctate</p>
-        <a href="mailto:cristobaljulian123456@gmail.com" class="mt-4 inline-flex items-center gap-2 text-sm transition hover:text-cyan-300">
-          <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+        <a href="mailto:cristobaljulian123456@gmail.com" class="mt-4 inline-flex max-w-full items-center gap-2 text-sm transition hover:text-cyan-300">
+          <svg class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
           </svg>
-          cristobaljulian123456&#64;gmail.com
+          <!-- El correo no tiene espacios: se parte solo si no cabe en la columna (en vez de desbordarla). -->
+          <span class="min-w-0 wrap-anywhere">cristobaljulian123456&#64;gmail.com</span>
         </a>
         <div class="mt-4 flex justify-center gap-3 md:justify-start">
           <a href="https://linkedin.com/in/cristóbal-vizcaino-mercado-1a82a3359" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"

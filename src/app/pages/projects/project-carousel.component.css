@@ -71,6 +71,23 @@
   outline-offset: 2px;
 }
 
+/* Vista ampliada en móvil: las flechas van debajo de la imagen para no tapar sus bordes. */
+@media (max-width: 639.98px) {
+  .nav-btn--lightbox {
+    top: auto;
+    bottom: 1rem;
+    transform: none;
+  }
+
+  .nav-btn--lightbox.prev {
+    left: calc(50% - 3.25rem);
+  }
+
+  .nav-btn--lightbox.next {
+    right: calc(50% - 3.25rem);
+  }
+}
+
 @media (min-width: 640px) {
   .nav-btn {
     width: 3rem;

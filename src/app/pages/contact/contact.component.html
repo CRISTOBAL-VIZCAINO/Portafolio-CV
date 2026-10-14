@@ -9,13 +9,14 @@
 
   <div class="mx-auto grid max-w-6xl gap-6 lg:grid-cols-5 lg:gap-8">
     <!-- Datos de contacto -->
-    <aside class="flex flex-col gap-6 rounded-2xl border border-white/10 bg-gradient-to-br from-blue-900/40 via-slate-900/60 to-cyan-900/30 p-6 sm:p-8 lg:col-span-2">
-      <div class="flex items-center gap-4">
+    <aside class="flex min-w-0 flex-col gap-6 rounded-2xl border border-white/10 bg-gradient-to-br from-blue-900/40 via-slate-900/60 to-cyan-900/30 p-6 sm:p-8 lg:col-span-2">
+      <div class="flex flex-wrap items-center gap-4">
         <img src="images/profile/cristobal-vizcaino.webp" alt="Cristóbal Vizcaíno" width="64" height="64" class="h-16 w-16 rounded-full object-cover object-top ring-2 ring-cyan-400/60" />
-        <div>
+        <!-- flex-wrap + mínimo de 8rem (o todo el ancho si no hay tanto): el nombre pasa bajo la foto solo con texto ampliado. -->
+        <div class="min-w-[min(8rem,100%)] flex-1">
           <p class="text-lg font-semibold text-white">Cristóbal Vizcaíno</p>
           <p class="text-sm text-gray-300">Desarrollador Web Full-Stack</p>
-          <span class="mt-1 inline-flex items-center gap-1.5 text-xs font-medium text-emerald-300">
+          <span class="mt-1 inline-flex max-w-full items-center gap-1.5 text-xs font-medium text-emerald-300">
             <span class="h-2 w-2 rounded-full bg-emerald-400"></span>
             Abierto a nuevos retos
           </span>
@@ -32,7 +33,7 @@
             </span>
             <span class="min-w-0">
               <span class="block text-xs text-gray-400">Correo</span>
-              <span class="block truncate text-sm font-medium text-white group-hover:text-cyan-300">cristobaljulian123456&#64;gmail.com</span>
+              <span class="block wrap-anywhere text-sm font-medium text-white group-hover:text-cyan-300">cristobaljulian123456&#64;gmail.com</span>
             </span>
           </a>
         </li>
@@ -95,7 +96,7 @@
     </aside>
 
     <!-- Formulario -->
-    <section class="rounded-2xl border border-white/10 bg-white/5 p-6 sm:p-8 lg:col-span-3">
+    <section class="min-w-0 rounded-2xl border border-white/10 bg-white/5 p-6 sm:p-8 lg:col-span-3">
       <h2 class="text-xl font-semibold text-white">Envíame un mensaje</h2>
       <p class="mt-1 text-sm text-gray-400">Los campos con <span class="text-red-400">*</span> son obligatorios.</p>
 

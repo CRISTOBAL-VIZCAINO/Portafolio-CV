@@ -25,6 +25,14 @@ Detalle y razones en @docs/ARQUITECTURA.md (§3 Convenciones, §4 Rutas).
 - Tailwind escanea `src/app` y `src/index.html` (`@source` en `src/styles.css`). Clases fuera de esas rutas no se generan.
 - Imágenes fuera de la primera pantalla con `loading="lazy"` y `decoding="async"`; la imagen principal (LCP) con `fetchpriority="high"`, `width` y `height`.
 
+## Responsive
+
+- Mobile-first con los breakpoints de Tailwind. El menú de escritorio aparece en `lg` (1024 px); no lo adelantes sin medir que cabe.
+- Hijos de rejillas y flex que contienen texto: `min-w-0`. Textos sin espacios (correos, URLs): `wrap-anywhere`. Nada de anchos fijos en px para texto ni `whitespace-nowrap` en textos que pueden crecer.
+- Alturas mínimas (`min-h-*`) en lugar de fijas en contenedores con texto.
+- Nunca `overflow-x: hidden` para esconder un desborde: busca el elemento que lo causa.
+- Comprueba 320, 390, 768, 1024 y 1440 px y las anchuras entre breakpoints (ver `docs/AUDITORIA_RESPONSIVE.md`).
+
 ## Accesibilidad (WCAG 2.2 AA)
 
 - Contraste: texto secundario sobre fondo oscuro como mínimo `text-gray-400`; sobre `bg-gray-700`, `text-gray-300`. No uses `text-gray-500` para texto.

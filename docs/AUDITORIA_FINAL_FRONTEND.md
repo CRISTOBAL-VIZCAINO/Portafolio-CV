@@ -292,6 +292,8 @@ El inicial crece porque inicio pasó al bundle inicial, decisión tomada con la 
 
 ## 12. Estado final de Git
 
+> **Actualización (14 oct. 2026):** el usuario hizo commit de todo lo anterior como `ed45c0f` en `main` y lo subió a `origin/main`. Se verificó que ese commit no contiene el DOCX interno ni `docs/fuentes-locales/`. Lo siguiente describe el estado al cerrar esta auditoría.
+
 - Rama `refactor/auditoria-frontend`, HEAD `e2ebc99`. **No se hizo commit, push ni despliegue.**
 - El índice lo prepara otro proceso con `git add -A` (última vez a las 23:50); ninguna de estas auditorías lo modificó salvo para quitar del stage el DOCX interno. Lo hecho después de esa hora (§14) está en el working tree sin stage, y `src/app/app.routes.spec.ts` sin seguimiento. `.cursor/` no está en `.gitignore`.
 - Archivos sensibles: `git ls-files --stage` no contiene el DOCX interno ni `docs/fuentes-locales/`.

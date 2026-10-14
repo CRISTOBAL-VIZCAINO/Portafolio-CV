@@ -26,6 +26,8 @@ Portafolio-CV/
 │   ├── ARQUITECTURA.md           Este documento (fuente de verdad)
 │   ├── AUDITORIA_FINAL_FRONTEND.md  Estado verificado, pendientes y recomendaciones (oct. 2026)
 │   ├── AUDITORIA_FRONTEND.md     Informe histórico de la primera auditoría
+│   ├── AUDITORIA_RESPONSIVE.md   Auditoría responsive (matriz de dispositivos, defectos y pruebas)
+│   ├── evidencias/responsive/    Capturas seleccionadas de esa auditoría
 │   ├── CV_Cristobal_Vizcaino.md  Fuente del CV
 │   └── fuentes-locales/          (en .gitignore) documentos internos y originales de imágenes
 ├── public/                       Se copia tal cual a la raíz del sitio
@@ -84,6 +86,7 @@ Portafolio-CV/
 - **Estilos:** utilidades de Tailwind en la plantilla; CSS de componente solo para lo que Tailwind no cubre (el carrusel). Tema único oscuro definido en `src/styles.css`.
 - **Contraste:** sobre fondos oscuros, texto secundario como mínimo `text-gray-400` (`text-gray-300` sobre `bg-gray-700`). `text-gray-500` no llega a 4.5:1.
 - **Nombres accesibles:** si un control tiene texto visible y `aria-label`, el `aria-label` debe contener ese texto ("Ampliar" → `aria-label="Ampliar imagen"`).
+- **Responsive:** diseño mobile-first con los breakpoints de Tailwind (`sm` 640, `md` 768, `lg` 1024, `xl` 1280). El menú de escritorio aparece desde `lg`: por debajo no cabe junto al nombre (medido). Hijos de rejillas y flex que contienen texto llevan `min-w-0`; nada de anchos fijos en px para texto; textos sin espacios (correos, URLs) con `wrap-anywhere`; nunca `overflow-x: hidden` para ocultar un desborde. `src/styles.css` aplica `overflow-wrap: anywhere` a títulos, párrafos y listas (solo actúa si una palabra no cabe). Verificación y matriz de dispositivos en `AUDITORIA_RESPONSIVE.md`.
 - **Movimiento:** `src/styles.css` anula transiciones y animaciones con `prefers-reduced-motion: reduce`; para desplazar por código usa `scrollBehavior()` de `shared/motion.ts`, nunca `behavior: 'smooth'` fijo.
 
 ## 4. Rutas
@@ -200,6 +203,7 @@ Reglas:
 | `docs/ARQUITECTURA.md` | Este documento: **fuente de verdad** | En el mismo cambio que el código que describe |
 | `docs/AUDITORIA_FINAL_FRONTEND.md` | Estado verificado, pendientes y recomendaciones | Al cerrar un pendiente o con una nueva auditoría |
 | `docs/AUDITORIA_FRONTEND.md` | Primera auditoría (histórico) | No se edita |
+| `docs/AUDITORIA_RESPONSIVE.md` + `docs/evidencias/responsive/` | Matriz de dispositivos, defectos corregidos, pruebas y capturas | Al cambiar el layout de forma visible o repetir la auditoría responsive |
 | `docs/CV_Cristobal_Vizcaino.md` | Fuente del CV | Al cambiar la experiencia; regenera también `public/CV_Cristobal_Vizcaino.pdf` |
 | `.cursor/rules/*.mdc` | Resumen operativo para Cursor | En el mismo cambio que este documento |
 

@@ -23,7 +23,7 @@ src/app/
 src/environments/  URL y clave pública (anon) de Supabase
 public/images/   profile/, projects/<proyecto>/NN.webp, technologies/*.svg
 docs/            ARQUITECTURA.md (fuente de verdad), AUDITORIA_FINAL_FRONTEND.md (estado verificado),
-                 AUDITORIA_FRONTEND.md (histórico), CV en Markdown
+                 AUDITORIA_RESPONSIVE.md (+ evidencias/responsive/), AUDITORIA_FRONTEND.md (histórico), CV en Markdown
 .cursor/rules/   reglas para Cursor (resumen operativo de docs/ARQUITECTURA.md)
 ```
 

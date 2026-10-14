@@ -1,16 +1,16 @@
-<header class="relative mb-8 flex h-20 items-center justify-between bg-white px-4 text-gray-900 shadow-lg sm:px-6 md:h-32 lg:px-8">
-  <div class="flex flex-1 justify-center">
+<header class="relative mb-8 flex min-h-20 items-center justify-between gap-4 bg-white px-4 py-2 text-gray-900 shadow-lg sm:px-6 lg:min-h-32 lg:px-8">
+  <div class="flex min-w-0 flex-1 justify-center">
     <a
       routerLink="/"
       aria-label="Cristóbal Vizcaíno M, ir al inicio"
-      class="inline-flex items-center justify-center rounded-lg px-4 py-2 text-base font-bold transition-colors duration-300 hover:bg-gray-100 sm:text-xl md:text-3xl lg:text-4xl">
-      <span class="bg-gradient-to-r from-blue-500 via-green-500 to-blue-500 bg-clip-text text-transparent">Cristóbal Vizcaíno M</span>
+      class="inline-flex max-w-full items-center justify-center rounded-lg px-4 py-2 text-center text-base font-bold transition-colors duration-300 hover:bg-gray-100 sm:text-2xl lg:text-3xl xl:text-4xl">
+      <span class="min-w-0 wrap-anywhere bg-gradient-to-r from-blue-500 via-green-500 to-blue-500 bg-clip-text text-transparent">Cristóbal Vizcaíno M</span>
     </a>
   </div>
 
   <!-- menu desktop -->
-  <nav aria-label="Principal" class="hidden items-center space-x-8 sm:flex">
-    <a routerLink="/" class="rounded-xl px-6 py-4 text-lg font-semibold text-gray-600 transition-all duration-300 hover:scale-105 hover:bg-white hover:text-gray-900 hover:shadow-lg">
+  <nav aria-label="Principal" class="hidden flex-wrap items-center justify-end gap-2 lg:flex xl:gap-6">
+    <a routerLink="/" class="whitespace-nowrap rounded-xl px-4 py-3 text-lg font-semibold text-gray-600 xl:px-6 transition-all duration-300 hover:scale-105 hover:bg-white hover:text-gray-900 hover:shadow-lg">
       <span class="flex items-center justify-center">
         <svg class="mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M6 16h2v4H6v-4zm3.172-7l1.83 1.83a1.414 1.414 0 01-2.122 0L8.83 8.83zM11.67 6.83l1.83-1.83a1.414 1.414 0 012.122 0L16.17 8.83a1.414 1.414 0 010 2.122l-1.83 1.83a1.414 1.414 0 01-2.122 0L11.67 11.17a1.414 1.414 0 010-2.122z"/>
@@ -18,7 +18,7 @@
         Acerca de mí
       </span>
     </a>
-    <a routerLink="/proyectos" class="rounded-xl px-6 py-4 text-lg font-semibold text-gray-600 transition-all duration-300 hover:scale-105 hover:bg-white hover:text-gray-900 hover:shadow-lg">
+    <a routerLink="/proyectos" class="whitespace-nowrap rounded-xl px-4 py-3 text-lg font-semibold text-gray-600 xl:px-6 transition-all duration-300 hover:scale-105 hover:bg-white hover:text-gray-900 hover:shadow-lg">
       <span class="flex items-center justify-center">
         <svg class="mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
@@ -26,7 +26,7 @@
         Proyectos
       </span>
     </a>
-    <a routerLink="/contacto" class="rounded-xl px-6 py-4 text-lg font-semibold text-gray-600 transition-all duration-300 hover:scale-105 hover:bg-white hover:text-gray-900 hover:shadow-lg">
+    <a routerLink="/contacto" class="whitespace-nowrap rounded-xl px-4 py-3 text-lg font-semibold text-gray-600 xl:px-6 transition-all duration-300 hover:scale-105 hover:bg-white hover:text-gray-900 hover:shadow-lg">
       <span class="flex items-center justify-center">
         <svg class="mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
@@ -37,7 +37,7 @@
   </nav>
 
   <!-- menu movil -->
-  <div class="relative sm:hidden">
+  <div class="relative lg:hidden">
     <button
       #menuButton
       type="button"
@@ -54,10 +54,10 @@
     @if (menuOpen()) {
       <!-- Capa transparente: cierra el menú al tocar fuera -->
       <div class="fixed inset-0 z-40" aria-hidden="true" (click)="closeMenu()"></div>
-      <ul id="mobile-menu" class="absolute right-0 top-full z-50 mt-3 w-52 rounded-lg bg-white p-2 shadow-lg">
-        <li><a routerLink="/" (click)="closeMenu()" class="block rounded-md px-3 py-2 text-sm transition-colors duration-300 hover:bg-gray-50">Acerca de mí</a></li>
-        <li><a routerLink="/proyectos" (click)="closeMenu()" class="block rounded-md px-3 py-2 text-sm transition-colors duration-300 hover:bg-gray-50">Proyectos</a></li>
-        <li><a routerLink="/contacto" (click)="closeMenu()" class="block rounded-md px-3 py-2 text-sm transition-colors duration-300 hover:bg-gray-50">Contáctame</a></li>
+      <ul id="mobile-menu" class="absolute right-0 top-full z-50 mt-3 w-56 rounded-lg bg-white p-2 shadow-lg">
+        <li><a routerLink="/" (click)="closeMenu()" class="block rounded-md px-4 py-3 text-base transition-colors duration-300 hover:bg-gray-50">Acerca de mí</a></li>
+        <li><a routerLink="/proyectos" (click)="closeMenu()" class="block rounded-md px-4 py-3 text-base transition-colors duration-300 hover:bg-gray-50">Proyectos</a></li>
+        <li><a routerLink="/contacto" (click)="closeMenu()" class="block rounded-md px-4 py-3 text-base transition-colors duration-300 hover:bg-gray-50">Contáctame</a></li>
       </ul>
     }
   </div>

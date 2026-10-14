@@ -13,5 +13,5 @@ Ver @docs/ARQUITECTURA.md (§7 Rendimiento, §8 Pruebas).
 - Prueba comportamiento observable (texto mostrado, petición enviada, estado), no detalles internos.
 - Nunca llames al Supabase real desde una prueba: espía `window.fetch` o sustituye `ContactService`.
 - Si una prueba falla, decide primero si el error está en la prueba o en el código, y corrige el que corresponda; no desactives ni debilites pruebas para que pasen.
-- Antes de dar un cambio por terminado: `npm run build` sin advertencias, `npm test` en verde y, si cambia la UI, revisión en el navegador (escritorio y móvil a 390 px, sin scroll horizontal).
+- Antes de dar un cambio por terminado: `npm run build` sin advertencias, `npm test` en verde y, si cambia la UI, revisión en el navegador sobre el build de producción: 320, 390, 768, 1024 y 1440 px, sin scroll horizontal y sin texto cortado (método en `docs/AUDITORIA_RESPONSIVE.md`).
 - Rendimiento: mide sobre el build de producción servido (no `ng serve`) con Lighthouse en perfil móvil, y compara siempre mediciones equivalentes.

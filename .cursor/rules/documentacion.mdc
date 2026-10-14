@@ -14,6 +14,7 @@ alwaysApply: false
 | `docs/ARQUITECTURA.md` | **Fuente de verdad**: estructura, convenciones, rutas, contenido, Supabase, rendimiento, pruebas, despliegue | En el mismo cambio que el código que describe |
 | `docs/AUDITORIA_FINAL_FRONTEND.md` | Estado verificado del frontend (oct. 2026), pendientes y recomendaciones | Al cerrar un pendiente que lista, o con una nueva auditoría |
 | `docs/AUDITORIA_FRONTEND.md` | Informe histórico de la primera auditoría | No se edita (solo su nota inicial) |
+| `docs/AUDITORIA_RESPONSIVE.md` + `docs/evidencias/responsive/` | Auditoría responsive: matriz, defectos, pruebas y capturas seleccionadas | Al cambiar el layout de forma visible o repetir la auditoría (pocas capturas representativas, no cientos) |
 | `docs/CV_Cristobal_Vizcaino.md` | Fuente del CV | Cuando cambie la experiencia; regenera también `public/CV_Cristobal_Vizcaino.pdf` con el mismo nombre |
 | `.cursor/rules/*.mdc` | Resumen operativo para asistentes de IA | En el mismo cambio que `docs/ARQUITECTURA.md` |
 
