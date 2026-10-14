@@ -1,0 +1,28 @@
+---
+description: Qué documento cubre cada tema y cómo mantener alineados los .md y estas reglas con el código
+globs: **/*.md, .cursor/rules/*.mdc
+alwaysApply: false
+---
+
+# Documentación y reglas
+
+## Mapa de documentos
+
+| Archivo | Contenido | Cuándo se actualiza |
+|---|---|---|
+| `README.md` | Qué es el proyecto, comandos y estructura resumida | Al cambiar comandos, carpetas principales o el stack |
+| `docs/ARQUITECTURA.md` | **Fuente de verdad**: estructura, convenciones, rutas, contenido, Supabase, rendimiento, pruebas, despliegue | En el mismo cambio que el código que describe |
+| `docs/AUDITORIA_FINAL_FRONTEND.md` | Estado verificado del frontend (oct. 2026), pendientes y recomendaciones | Al cerrar un pendiente que lista, o con una nueva auditoría |
+| `docs/AUDITORIA_FRONTEND.md` | Informe histórico de la primera auditoría | No se edita (solo su nota inicial) |
+| `docs/CV_Cristobal_Vizcaino.md` | Fuente del CV | Cuando cambie la experiencia; regenera también `public/CV_Cristobal_Vizcaino.pdf` con el mismo nombre |
+| `.cursor/rules/*.mdc` | Resumen operativo para asistentes de IA | En el mismo cambio que `docs/ARQUITECTURA.md` |
+
+## Reglas
+
+- Si el código cambia algo que un documento describe (rutas, carpetas, comandos, convenciones, cifras), actualiza el documento en el mismo cambio.
+- `docs/ARQUITECTURA.md` manda. Estas reglas lo resumen; si discrepan, corrige ambos.
+- Las cifras (tamaños, LCP, número de pruebas) se escriben solo después de medirlas, indicando cómo y cuándo. No copies cifras de otro documento sin verificarlas.
+- Las rutas de archivo citadas en un documento deben existir. Si mueves o renombras un archivo, busca sus menciones en `*.md` y `.cursor/rules/`.
+- No crees documentos nuevos que repitan otros: amplía el que corresponda según el mapa.
+- Escribe en español, con frases cortas y sin datos internos de terceros (el repositorio es público).
+- Las reglas de Cursor van en `.cursor/rules/` con extensión `.mdc` y frontmatter (`description`, `globs`, `alwaysApply`). Cada una debe ser corta (muy por debajo de 500 líneas) y referenciar `@docs/ARQUITECTURA.md` en lugar de copiarlo.

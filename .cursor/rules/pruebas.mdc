@@ -1,0 +1,17 @@
+---
+description: Cómo escribir y ejecutar pruebas y cómo verificar un cambio antes de darlo por terminado
+globs: src/**/*.spec.ts
+alwaysApply: false
+---
+
+# Pruebas y verificación
+
+Ver @docs/ARQUITECTURA.md (§7 Rendimiento, §8 Pruebas).
+
+- Pruebas unitarias con Jasmine junto al archivo que prueban (`contact.service.spec.ts` al lado de `contact.service.ts`). Las rutas y las redirecciones de las URLs antiguas se prueban en `app.routes.spec.ts` con `RouterTestingHarness`.
+- Ejecutar: `CHROME_BIN=/usr/bin/google-chrome-stable npx ng test --watch=false --browsers=ChromeHeadless` (o `npm test` si Chrome está en la ruta por defecto).
+- Prueba comportamiento observable (texto mostrado, petición enviada, estado), no detalles internos.
+- Nunca llames al Supabase real desde una prueba: espía `window.fetch` o sustituye `ContactService`.
+- Si una prueba falla, decide primero si el error está en la prueba o en el código, y corrige el que corresponda; no desactives ni debilites pruebas para que pasen.
+- Antes de dar un cambio por terminado: `npm run build` sin advertencias, `npm test` en verde y, si cambia la UI, revisión en el navegador (escritorio y móvil a 390 px, sin scroll horizontal).
+- Rendimiento: mide sobre el build de producción servido (no `ng serve`) con Lighthouse en perfil móvil, y compara siempre mediciones equivalentes.

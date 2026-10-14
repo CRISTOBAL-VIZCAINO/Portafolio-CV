@@ -1,0 +1,27 @@
+---
+description: Cómo añadir o editar proyectos, habilidades, tecnologías e imágenes del portafolio
+globs: src/app/data/**, public/images/**, scripts/convert-to-webp.js
+alwaysApply: false
+---
+
+# Contenido e imágenes
+
+Procedimiento completo en @docs/ARQUITECTURA.md (§5 Contenido e imágenes).
+
+## Proyectos y habilidades
+
+- Un proyecto nuevo es un objeto más en `PROJECTS` (`src/app/data/projects.data.ts`). La página de proyectos, la vista previa de inicio y el índice se generan solos.
+- El `id` del proyecto es el ancla de la URL (`/proyectos#<id>`): minúsculas y guiones, único (lo comprueba `projects.data.spec.ts`). Cambiarlo rompe los enlaces ya compartidos a ese proyecto.
+- Toda tecnología que use un proyecto debe aparecer también en `src/app/data/skills.data.ts` ("Acerca de mí" tiene que quedar alineado con los proyectos).
+- Las tecnologías salen del catálogo único `TECH` (`src/app/data/tech.catalog.ts`) con `tech('clave')` o `tech('clave', 'Etiqueta específica')`. No dupliques logos ni nombres.
+- "Acerca de mí" es genérico: no nombres empresas ni proyectos concretos en el resumen ni en las pastillas de inicio.
+
+## Imágenes
+
+- Capturas en `public/images/projects/<proyecto>/` numeradas `01.webp`, `02.webp`… en el orden del carrusel; foto en `public/images/profile/`; logos en `public/images/technologies/<nombre>.svg`.
+- Flujo: copiar el PNG/JPG a la carpeta → `npm run images` (WebP, máx. 1600 px, calidad 80; no sobrescribe sin `--force`) → referenciar el `.webp` → sacar el original del repo (por ejemplo a `docs/fuentes-locales/`).
+- Una captura debe pesar entre 30 y 130 KB; nunca más de 200 KB.
+- Escribe cada ruta completa en el código (`'reconciliacion/01.webp'`); no las construyas con bucles, para que una búsqueda de texto encuentre cada uso.
+- Cada imagen necesita `alt` y `caption` descriptivos.
+- **Repositorio público:** difumina nombres de clientes, compañeros e identificadores internos antes de añadir una captura.
+- Logos nuevos: el SVG de Devicon 2.16.0 (`icons/<nombre>/<nombre>-original.svg`) copiado al proyecto, nunca enlazado a un CDN. Si no hay logo, usa un `glyph` de `GLYPH_PATHS`.

@@ -1,0 +1,111 @@
+<section class="container mx-auto px-4 py-6 sm:py-8 md:py-10">
+  <header class="mx-auto mb-10 max-w-3xl text-center">
+    <h1 class="mb-3 bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-4xl font-bold text-transparent sm:text-5xl">Mis Proyectos</h1>
+    <p class="text-base text-gray-300 sm:text-lg">Experiencia laboral y proyectos personales: el problema que resolví, cómo lo construí y con qué tecnologías.</p>
+    <div class="mx-auto mt-4 h-1 w-24 rounded-full bg-gradient-to-r from-blue-500 to-cyan-400"></div>
+  </header>
+
+  <!-- Índice rápido -->
+  <nav aria-label="Índice de proyectos" class="mx-auto mb-14 flex max-w-5xl flex-wrap justify-center gap-2">
+    @for (project of projects; track project.id) {
+      <button
+        type="button"
+        (click)="scrollTo(project.id)"
+        class="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-gray-200 transition hover:border-cyan-400/60 hover:bg-cyan-500/10 cursor-pointer">
+        <span class="text-[11px] uppercase tracking-wide text-cyan-300/80">{{ project.kind }}</span>
+        <span class="font-semibold">{{ project.title }}</span>
+      </button>
+    }
+  </nav>
+
+  <div class="mx-auto flex max-w-6xl flex-col gap-20 sm:gap-24">
+    @for (project of projects; track project.id) {
+      <article [id]="project.id" class="scroll-mt-6">
+        <header class="mb-8 text-center">
+          <div class="mb-4 flex flex-wrap items-center justify-center gap-2 text-xs font-semibold uppercase tracking-wider">
+            <span class="rounded-full border border-cyan-500/40 bg-cyan-500/15 px-3 py-1 text-cyan-300">{{ project.kind }}</span>
+            <span class="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-gray-300">{{ project.organization }}</span>
+            @if (project.period) {
+              <span class="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-gray-400">{{ project.period }}</span>
+            }
+          </div>
+          <h2 class="mb-3 bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-3xl font-bold text-transparent sm:text-4xl md:text-5xl">{{ project.title }}</h2>
+          <p class="mx-auto max-w-3xl text-base text-gray-300 sm:text-lg">{{ project.tagline }}</p>
+          @if (project.role) {
+            <p class="mt-2 text-sm text-gray-400">{{ project.role }}</p>
+          }
+        </header>
+
+        @if (project.stats) {
+          <div class="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-blue-900/40 via-slate-900/60 to-cyan-900/30 p-6 sm:p-10">
+            <div class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+              @for (stat of project.stats; track stat.label) {
+                <div class="text-center">
+                  <div class="bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-3xl font-bold text-transparent sm:text-4xl">{{ stat.value }}</div>
+                  <p class="mt-2 text-xs text-gray-300 sm:text-sm">{{ stat.label }}</p>
+                </div>
+              }
+            </div>
+          </div>
+        }
+
+        @if (project.images.length) {
+          <app-project-carousel [images]="project.images" [label]="'Capturas de ' + project.title" />
+        }
+
+        <div class="mt-8 rounded-2xl border border-white/10 bg-white/5 p-6 sm:p-8">
+          <p class="text-base leading-relaxed text-gray-200 sm:text-lg">{{ project.context }}</p>
+
+          <h3 class="mt-8 mb-4 text-lg font-semibold text-white">Lo que construí</h3>
+          <ul class="grid gap-4 md:grid-cols-2">
+            @for (highlight of project.highlights; track highlight.title) {
+              <li class="flex gap-3 rounded-xl border border-white/5 bg-slate-900/40 p-4">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" class="mt-0.5 h-5 w-5 shrink-0 text-cyan-400" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <div>
+                  <p class="font-semibold text-white">{{ highlight.title }}</p>
+                  <p class="mt-1 text-sm leading-relaxed text-gray-300">{{ highlight.text }}</p>
+                </div>
+              </li>
+            }
+          </ul>
+
+          @if (project.result) {
+            <div class="mt-6 flex gap-3 rounded-xl border border-cyan-500/30 bg-cyan-500/10 p-4">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" class="mt-0.5 h-5 w-5 shrink-0 text-cyan-300" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" />
+              </svg>
+              <p class="text-sm leading-relaxed text-cyan-50 sm:text-base">
+                <span class="font-semibold text-cyan-300">Resultado: </span>{{ project.result }}
+              </p>
+            </div>
+          }
+
+          <h3 class="mt-8 mb-4 text-lg font-semibold text-white">Tecnologías</h3>
+          <ul class="flex flex-wrap gap-2">
+            @for (item of project.techs; track item.label) {
+              <li class="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 py-1 pl-1 pr-3 text-sm text-gray-200">
+                <app-tech-icon [tech]="item" class="h-7 w-7 p-1" />
+                {{ item.label }}
+              </li>
+            }
+          </ul>
+        </div>
+      </article>
+    }
+  </div>
+
+  <div class="mx-auto mt-20 max-w-3xl rounded-2xl border border-white/10 bg-gradient-to-br from-blue-900/40 to-cyan-900/20 p-8 text-center">
+    <h2 class="text-2xl font-bold text-white sm:text-3xl">¿Te interesa mi perfil?</h2>
+    <p class="mt-2 text-gray-300">Cuéntame sobre tu proyecto o vacante y conversemos.</p>
+    <a
+      routerLink="/contacto"
+      class="mt-6 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 px-8 py-4 font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:from-blue-700 hover:to-cyan-700 cursor-pointer">
+      Contáctame
+      <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+      </svg>
+    </a>
+  </div>
+</section>

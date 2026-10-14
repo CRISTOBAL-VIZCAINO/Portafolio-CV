@@ -1,1 +1,16 @@
-/*    /index.html   200
+# Netlify: https://docs.netlify.com/manage/routing/redirects/redirect-options/
+# Gana la primera regla que coincide, y ninguna se aplica si el archivo existe (shadowing).
+
+# URLs anteriores a octubre de 2026 (CV en PDF, sitemap antiguo, enlaces externos): 301 permanente.
+# El navegador conserva el ancla (#proyecto). No las quites.
+/menuNavbar/aboutMePag1   /           301
+/menuNavbar/proyectsPag2  /proyectos  301
+/menuNavbar/contactPag3   /contacto   301
+/menuNavbar/*             /           301
+/menuNavbar               /           301
+
+# Imágenes inexistentes: 404 real en vez de devolver index.html con 200.
+/images/*  /404.html  404
+
+# SPA: cualquier otra ruta la resuelve Angular.
+/*  /index.html  200

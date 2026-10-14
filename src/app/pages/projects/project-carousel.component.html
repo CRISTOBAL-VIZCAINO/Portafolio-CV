@@ -1,0 +1,118 @@
+<div role="region" aria-roledescription="carrusel" [attr.aria-label]="label()">
+  <div class="relative overflow-hidden rounded-2xl border border-white/10 bg-slate-950/70 shadow-xl">
+    <div
+      #track
+      class="track"
+      [class.is-dragging]="dragging()"
+      [class.free-scroll]="freeScroll()"
+      tabindex="0"
+      [attr.aria-label]="label() + '. Usa las flechas para navegar y Enter para ampliar.'"
+      (scroll)="onScroll()"
+      (pointerdown)="onPointerDown($event)"
+      (pointermove)="onPointerMove($event)"
+      (pointerup)="onPointerUp($event)"
+      (pointercancel)="onPointerUp($event)"
+      (click)="onTrackClick()"
+      (keydown)="onTrackKeydown($event)">
+      @for (image of images(); track image.src; let i = $index) {
+        <div class="slide" role="group" aria-roledescription="diapositiva" [attr.aria-label]="(i + 1) + ' de ' + images().length">
+          <img
+            [src]="image.src"
+            [alt]="image.alt"
+            draggable="false"
+            loading="lazy"
+            decoding="async"
+            class="h-full w-full object-contain" />
+        </div>
+      }
+    </div>
+
+    @if (images().length > 1) {
+      <button type="button" class="nav-btn left-2 sm:left-3" (click)="prev()" aria-label="Imagen anterior">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" class="h-5 w-5" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+        </svg>
+      </button>
+      <button type="button" class="nav-btn right-2 sm:right-3" (click)="next()" aria-label="Imagen siguiente">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" class="h-5 w-5" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+        </svg>
+      </button>
+    }
+
+    <button
+      type="button"
+      class="absolute top-2 right-2 sm:top-3 sm:right-3 flex items-center gap-1.5 rounded-full bg-black/60 px-3 py-1.5 text-xs font-medium text-white backdrop-blur-sm transition hover:bg-black/80 cursor-pointer"
+      (click)="openLightbox()"
+      aria-label="Ampliar imagen">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" class="h-4 w-4" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" />
+      </svg>
+      <span class="hidden sm:inline">Ampliar</span>
+    </button>
+  </div>
+
+  <div class="mt-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+    <p class="text-sm text-gray-300" aria-live="polite">
+      <span class="font-semibold text-cyan-300">{{ current() + 1 }} / {{ images().length }}</span>
+      · {{ currentImage().caption }}
+    </p>
+    @if (images().length > 1) {
+      <div class="-mx-1 flex flex-wrap items-center">
+        @for (image of images(); track image.src; let i = $index) {
+          <button
+            type="button"
+            class="group flex h-6 min-w-6 items-center justify-center px-1 cursor-pointer"
+            [attr.aria-label]="'Ir a la imagen ' + (i + 1)"
+            [attr.aria-current]="i === current()"
+            (click)="goTo(i)">
+            <span
+              class="block h-2 rounded-full transition-all duration-300"
+              [class]="i === current() ? 'w-6 bg-cyan-400' : 'w-2 bg-white/25 group-hover:bg-white/50'"></span>
+          </button>
+        }
+      </div>
+    }
+  </div>
+  <p class="mt-1 hidden text-xs text-gray-400 md:block">Arrastra con el mouse, usa las flechas o haz clic en la imagen para verla en grande.</p>
+</div>
+
+@if (lightboxOpen()) {
+  <div
+    class="fixed inset-0 z-[100] flex flex-col bg-black/90 backdrop-blur-sm"
+    role="dialog"
+    aria-modal="true"
+    [attr.aria-label]="currentImage().caption"
+    (click)="closeLightbox()">
+    <div class="flex items-center justify-between gap-4 px-4 py-3 text-white sm:px-6" (click)="$event.stopPropagation()">
+      <p class="text-sm sm:text-base">
+        <span class="font-semibold text-cyan-300">{{ current() + 1 }} / {{ images().length }}</span>
+        · {{ currentImage().caption }}
+      </p>
+      <button type="button" class="rounded-full p-2 transition hover:bg-white/10 cursor-pointer" (click)="closeLightbox()" aria-label="Cerrar">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" class="h-6 w-6" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+    <div class="relative flex min-h-0 flex-1 items-center justify-center px-4 pb-6 sm:px-20">
+      <img
+        [src]="currentImage().src"
+        [alt]="currentImage().alt"
+        class="max-h-full max-w-full rounded-lg object-contain shadow-2xl"
+        (click)="$event.stopPropagation()" />
+      @if (images().length > 1) {
+        <button type="button" class="nav-btn left-2 sm:left-5" (click)="prev(); $event.stopPropagation()" aria-label="Imagen anterior">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" class="h-5 w-5" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+          </svg>
+        </button>
+        <button type="button" class="nav-btn right-2 sm:right-5" (click)="next(); $event.stopPropagation()" aria-label="Imagen siguiente">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" class="h-5 w-5" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+          </svg>
+        </button>
+      }
+    </div>
+  </div>
+}

@@ -1,0 +1,37 @@
+---
+description: Convenciones de Angular, plantillas, estilos y accesibilidad para componentes del portafolio
+globs: src/app/**/*.ts, src/app/**/*.html, src/app/**/*.css, src/styles.css
+alwaysApply: false
+---
+
+# Componentes Angular, estilos y accesibilidad
+
+Detalle y razones en @docs/ARQUITECTURA.md (§3 Convenciones, §4 Rutas).
+
+## Código
+
+- Archivos `kebab-case` con sufijo de tipo (`project-carousel.component.ts`); clase `ProjectCarouselComponent`; selector con prefijo `app-` (`app-project-carousel`).
+- Componentes standalone con `changeDetection: ChangeDetectionStrategy.OnPush`.
+- Estado con `signal`/`computed`; entradas con `input()`/`input.required()`; dependencias con `inject()` (no constructores con parámetros); campos `readonly` cuando no se reasignan.
+- Eventos globales en `host: { '(document:keydown)': '...' }`, no `@HostListener`. Acceso al DOM global con `inject(DOCUMENT)`.
+- Páginas con `export default class` y `loadComponent` en `app.routes.ts`. Excepción: inicio y el layout se importan directamente (bundle inicial) porque inicio es la página de entrada; está medido, no lo cambies sin medir.
+- Formularios reactivos tipados con `NonNullableFormBuilder`. Nunca `any`.
+- Navegación interna con `routerLink` en `<a>` y las rutas `/`, `/proyectos`, `/contacto` (nunca las antiguas `/menuNavbar/...`), nunca `<button routerLink>` ni `window.location`. Enlaces externos con `target="_blank" rel="noopener noreferrer"`.
+- Sin manipulación manual del DOM cuando hay una alternativa declarativa (`<a download>`, referencias de plantilla).
+
+## Plantillas y estilos
+
+- Utilidades de Tailwind en la plantilla. CSS de componente solo para lo que Tailwind no cubre. Tema único oscuro (`src/styles.css`); no uses `dark:` ni dependas del modo del sistema.
+- Tailwind escanea `src/app` y `src/index.html` (`@source` en `src/styles.css`). Clases fuera de esas rutas no se generan.
+- Imágenes fuera de la primera pantalla con `loading="lazy"` y `decoding="async"`; la imagen principal (LCP) con `fetchpriority="high"`, `width` y `height`.
+
+## Accesibilidad (WCAG 2.2 AA)
+
+- Contraste: texto secundario sobre fondo oscuro como mínimo `text-gray-400`; sobre `bg-gray-700`, `text-gray-300`. No uses `text-gray-500` para texto.
+- Si un control tiene texto visible y `aria-label`, el `aria-label` debe contener ese texto (ej.: botón "Ampliar" → `aria-label="Ampliar imagen"`).
+- Botones solo con ícono: `aria-label`; íconos decorativos: `aria-hidden="true"`; logos junto a su nombre: `alt=""`.
+- Objetivos táctiles de al menos 24×24 px.
+- Campos con `<label for>` y errores enlazados con `aria-describedby`; mensajes de resultado en `role="status"`.
+- Un solo `h1` por página y sin saltos de nivel en los encabezados.
+- Movimiento: para desplazar por código usa `scrollBehavior()` de `src/app/shared/motion.ts`; nunca `behavior: 'smooth'` fijo. Las transiciones ya se anulan con `prefers-reduced-motion` en `src/styles.css`.
+- Si al cerrar algo desaparece el elemento con foco (menú, diálogo), devuelve el foco a quien lo abrió.

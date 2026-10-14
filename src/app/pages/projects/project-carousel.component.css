@@ -1,0 +1,79 @@
+:host {
+  display: block;
+}
+
+.track {
+  display: flex;
+  overflow-x: auto;
+  /* hidden (no auto) para que la rueda vertical del mouse siga desplazando la página */
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  cursor: grab;
+  outline: none;
+}
+
+.track::-webkit-scrollbar {
+  display: none;
+}
+
+.track:focus-visible {
+  box-shadow: inset 0 0 0 2px rgb(34 211 238 / 0.8);
+}
+
+.track.free-scroll {
+  scroll-snap-type: none;
+}
+
+.track.is-dragging {
+  cursor: grabbing;
+  user-select: none;
+}
+
+.slide {
+  flex: 0 0 100%;
+  aspect-ratio: 16 / 9;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+}
+
+.slide img {
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 9999px;
+  border: 1px solid rgb(255 255 255 / 0.15);
+  background: rgb(0 0 0 / 0.55);
+  color: white;
+  backdrop-filter: blur(4px);
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.nav-btn:hover {
+  background: rgb(6 182 212 / 0.85);
+}
+
+.nav-btn:focus-visible {
+  outline: 2px solid rgb(34 211 238);
+  outline-offset: 2px;
+}
+
+@media (min-width: 640px) {
+  .nav-btn {
+    width: 3rem;
+    height: 3rem;
+  }
+}

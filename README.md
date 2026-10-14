@@ -1,59 +1,38 @@
-# PortafolioCJVM
+# Portafolio CJVM
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.8.
+Portafolio personal de Cristóbal Vizcaíno. Angular 19 (standalone, OnPush) + Tailwind CSS 4. El formulario de contacto guarda los mensajes en Supabase (API REST, sin SDK). Se despliega en Netlify.
 
-## Development server
-
-To start a local development server, run:
+## Comandos
 
 ```bash
-ng serve
+npm install
+npm start          # servidor de desarrollo en http://localhost:4200
+npm run build      # build de producción en dist/portafolio-cjvm
+npm test           # pruebas unitarias (Karma + Jasmine); en Linux: CHROME_BIN=/usr/bin/google-chrome-stable npx ng test --watch=false --browsers=ChromeHeadless
+npm run images     # convierte PNG/JPG nuevos de public/images/ (y subcarpetas) a WebP (máx. 1600 px de ancho)
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Estructura
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+```
+src/app/
+├── layout/      navbar + <router-outlet> + footer (común a todas las páginas)
+├── pages/       home ("Acerca de mí"), projects (+ carrusel), contact (+ servicio de Supabase)
+├── shared/      tech-icon (logo de tecnología) y motion (respeta "reducir movimiento"), usados por varias páginas
+└── data/        contenido tipado: proyectos, habilidades, catálogo de tecnologías y sus tipos
+src/environments/  URL y clave pública (anon) de Supabase
+public/images/   profile/, projects/<proyecto>/NN.webp, technologies/*.svg
+docs/            ARQUITECTURA.md (fuente de verdad), AUDITORIA_FINAL_FRONTEND.md (estado verificado),
+                 AUDITORIA_FRONTEND.md (histórico), CV en Markdown
+.cursor/rules/   reglas para Cursor (resumen operativo de docs/ARQUITECTURA.md)
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Las rutas son `/` (Acerca de mí), `/proyectos` (con anclas por proyecto, ej. `/proyectos#reconciliacion`) y `/contacto`. Las URLs anteriores (`/menuNavbar/...`) redirigen a las nuevas: 301 en Netlify y redirección del router como respaldo. El layout y la página de inicio van en el bundle inicial; proyectos y contacto se cargan con lazy loading. Detalle completo en [docs/ARQUITECTURA.md](docs/ARQUITECTURA.md); qué documento cubre cada tema y cómo se mantienen alineados con las reglas de Cursor, en su §10.
 
-```bash
-ng generate --help
-```
+## Reglas para mantener el rendimiento
 
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- **Imágenes nuevas:** copia el PNG/JPG a `public/images/projects/<proyecto>/` (o la carpeta que corresponda), ejecuta `npm run images`, usa el `.webp` resultante y saca el original del repo. Una captura debe pesar unos 100 KB, no 1–2 MB. El repositorio es público: difumina nombres de clientes o datos internos antes de publicar una captura.
+- **Imágenes en plantillas:** las que no estén en la primera pantalla llevan `loading="lazy"`; si usan `h-auto`, añade `width` y `height` para evitar saltos de diseño.
+- **Dependencias:** el bundle inicial es Angular (core + router), zone.js, el layout, el footer y la página de inicio con sus datos; antes de añadir una librería, comprueba su peso con `npm run build` (hay presupuestos en `angular.json`).
+- **Sin recursos de terceros:** los logos de tecnologías están en `public/images/technologies/`; no los cargues desde un CDN.
+- **Tema:** el sitio es solo oscuro (`src/styles.css`); no dependas del modo claro/oscuro del sistema.

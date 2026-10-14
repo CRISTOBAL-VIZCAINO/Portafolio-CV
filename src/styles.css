@@ -1,2 +1,28 @@
-@import "tailwindcss";
-@plugin "daisyui";
+/* Tailwind v4 solo escanea el código de la app (no docs, scripts ni otros archivos del repo). */
+@import "tailwindcss" source(none);
+@source "./app";
+@source "./index.html";
+
+/*
+ * Tema único oscuro. El diseño está pensado para fondo oscuro con texto claro; antes el fondo lo
+ * decidía daisyUI según el modo del sistema operativo y, con el SO en modo claro, los textos
+ * blancos quedaban invisibles sobre fondo blanco.
+ */
+:root {
+  color-scheme: dark;
+  background-color: oklch(25.33% 0.016 252.42);
+  color: oklch(97.807% 0.029 256.847);
+}
+
+/* Respeta "reducir movimiento" del sistema: sin transiciones, animaciones ni desplazamientos suaves por CSS.
+   Los desplazamientos por JavaScript usan shared/motion.ts. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -40,3 +40,7 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Fuentes locales que no se publican (repo público): documentos internos de terceros
+# y originales de imágenes ya exportadas a WebP. Ver docs/ARQUITECTURA.md.
+/docs/fuentes-locales/

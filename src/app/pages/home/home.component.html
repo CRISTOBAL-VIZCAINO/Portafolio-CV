@@ -1,0 +1,143 @@
+<section class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
+    <div class="text-center mb-12">
+        <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white leading-tight">
+            Soy <span class="text-blue-400">Cristóbal Vizcaíno</span>, Desarrollador Web Full-Stack con +3 años de experiencia, siempre abierto a nuevos retos.
+        </h1>
+    </div>
+
+    <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6 mb-12 w-full">
+        <button type="button" class="w-full sm:w-64 py-3 px-6 bg-gradient-to-r from-blue-600 to-blue-800 text-white rounded-xl hover:from-blue-700 hover:to-blue-900 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 active:translate-y-0 active:shadow-lg active:bg-blue-800 active:from-blue-600 active:to-blue-800 cursor-pointer" (click)="scrollIntoView(proyectos)">
+            <span class="flex items-center justify-center">
+                Ver Proyectos
+                <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+            </span>
+        </button>
+        <a href="CV_Cristobal_Vizcaino.pdf" download="CV_Cristobal_Vizcaino.pdf" class="w-full sm:w-64 py-3 px-6 bg-white text-blue-600 border-2 border-blue-600 rounded-xl hover:bg-blue-50 hover:text-blue-700 hover:border-blue-700 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 active:translate-y-0 active:shadow-lg active:bg-blue-50 active:text-blue-600 active:border-blue-600 cursor-pointer">
+            <span class="flex items-center justify-center">
+                Descargar CV
+                <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                </svg>
+            </span>
+        </a>
+    </div>
+
+    <div class="flex flex-col sm:flex-row items-center justify-center mb-20 bg-gray-800 rounded-2xl overflow-hidden">
+        <div class="w-full sm:w-1/3 max-w-md aspect-square overflow-hidden mb-8 sm:mb-0 sm:mr-8 flex justify-center">
+            <img src="images/profile/cristobal-vizcaino.webp" alt="Cristóbal Vizcaíno" width="800" height="800" fetchpriority="high" decoding="async" class="w-full h-full object-cover object-top rounded-none sm:rounded-l-xl shadow-lg transform transition-transform duration-300 hover:scale-105">
+        </div>
+
+        <div class="w-full sm:w-2/3 max-w-4xl px-4 sm:px-8 py-6 sm:py-8">
+            <h2 class="text-2xl sm:text-3xl font-bold text-center sm:text-left text-white mb-4 sm:mb-6">Acerca de mí</h2>
+            <div class="bg-white/5 rounded-xl p-4 sm:p-6">
+                <p class="text-base sm:text-lg text-white font-medium leading-relaxed">
+                    Desarrollador Full-Stack con +3 años de experiencia transformando requisitos complejos en soluciones escalables y de alto rendimiento. Busco mejorar constantemente mis habilidades para ofrecer soluciones eficientes que garanticen una experiencia de usuario fluida e intuitiva.
+                </p>
+                <p class="mt-4 text-base sm:text-lg text-gray-200 leading-relaxed">
+                    En el backend trabajo con <span class="text-cyan-300 font-semibold">Node.js, NestJS, Express, Python/FastAPI y PHP</span>; en el frontend, con <span class="text-cyan-300 font-semibold">Angular 10–20, React 19 y Next.js</span>; y despliego en la nube sobre <span class="text-cyan-300 font-semibold">AWS, Google Cloud y Microsoft Azure</span> con Docker y Kubernetes. Aplico buenas prácticas y altos estándares de calidad en el código para construir aplicaciones escalables, de alto rendimiento y fáciles de mantener a largo plazo.
+                </p>
+            </div>
+            <ul class="mt-4 flex flex-wrap gap-2 text-sm text-gray-200">
+                <li class="rounded-full border border-white/10 bg-white/5 px-3 py-1">Desarrollador Full-Stack · +3 años</li>
+                <li class="rounded-full border border-white/10 bg-white/5 px-3 py-1">Barranquilla, Colombia · Remoto</li>
+                <li class="rounded-full border border-white/10 bg-white/5 px-3 py-1">Español nativo · Inglés intermedio</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Habilidades: misma fuente de datos que "Mis Proyectos" (data/skills.data.ts) -->
+    <div class="mb-12">
+        <div class="mb-10 text-center">
+            <h2 class="text-2xl sm:text-3xl font-bold text-white">Mis Habilidades</h2>
+            <p class="mt-2 text-gray-300">Las tecnologías que uso en mis proyectos, organizadas por área.</p>
+        </div>
+
+        <div class="mx-auto flex max-w-6xl flex-col gap-12">
+            @for (category of skillCategories; track category.title) {
+                <section>
+                    <div class="mb-4 flex flex-wrap items-baseline gap-x-3 gap-y-1 border-b border-white/10 pb-3">
+                        <h3 class="text-xl font-semibold text-white">{{ category.title }}</h3>
+                        <p class="text-sm text-gray-400">{{ category.description }}</p>
+                    </div>
+                    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                        @for (skill of category.skills; track skill.tech.label) {
+                            <div class="flex gap-4 rounded-2xl border border-white/5 bg-gray-800 p-4 shadow-lg transition duration-300 hover:-translate-y-0.5 hover:border-cyan-400/40">
+                                <app-tech-icon [tech]="skill.tech" class="h-12 w-12 p-2" />
+                                <div>
+                                    <h4 class="font-semibold text-white">{{ skill.tech.label }}</h4>
+                                    <p class="mt-1 text-sm leading-relaxed text-gray-300">{{ skill.detail }}</p>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </section>
+            }
+        </div>
+    </div>
+
+    <div #proyectos class="py-24">
+        <div class="mb-12 text-center">
+            <h2 class="text-3xl sm:text-4xl font-bold text-white">Algunos de mis proyectos empresariales y personales</h2>
+            <p class="mt-3 text-gray-300">Haz clic en cualquiera para ver las capturas, lo que construí y las tecnologías que usé.</p>
+        </div>
+
+        <section class="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-4 md:grid-cols-2">
+            @for (project of projects; track project.id) {
+                <a
+                    routerLink="/proyectos"
+                    [fragment]="project.id"
+                    class="group flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-gray-800 shadow-lg transition duration-300 hover:-translate-y-1 hover:border-cyan-400/50">
+                    <div class="relative aspect-video overflow-hidden bg-slate-950">
+                        @if (project.cover) {
+                            <img [src]="project.cover" [alt]="project.title" loading="lazy" decoding="async" class="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105">
+                        } @else {
+                            <div class="absolute inset-0 bg-gradient-to-br from-purple-900/60 via-blue-900/60 to-cyan-900/40"></div>
+                            <div class="absolute inset-0 opacity-25" style="background-image: radial-gradient(circle at 25% 30%, rgba(139,92,246,0.7) 0, transparent 45%), radial-gradient(circle at 75% 70%, rgba(34,211,238,0.6) 0, transparent 45%);"></div>
+                            <div class="relative flex h-full flex-col items-center justify-center px-6 text-center">
+                                <span class="bg-gradient-to-r from-purple-300 via-blue-300 to-cyan-300 bg-clip-text text-4xl font-bold text-transparent sm:text-5xl">{{ project.title }}</span>
+                                <span class="mt-3 max-w-md text-sm text-gray-200 sm:text-base">{{ project.tagline }}</span>
+                            </div>
+                        }
+                        <span class="absolute left-3 top-3 rounded-full bg-black/60 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-cyan-300 backdrop-blur-sm">{{ project.kind }}</span>
+                    </div>
+                    <div class="flex flex-1 flex-col bg-gray-700/60 p-6">
+                        <p class="text-xs uppercase tracking-wide text-gray-300">{{ project.organization }}</p>
+                        <h3 class="mt-1 text-2xl font-bold text-white transition-colors group-hover:text-cyan-300">{{ project.title }}</h3>
+                        <p class="mt-2 flex-1 leading-relaxed text-gray-300">{{ project.summary }}</p>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            @for (item of project.techs.slice(0, 5); track item.label) {
+                                <span class="flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 py-0.5 pl-0.5 pr-2.5 text-xs text-gray-200">
+                                    <app-tech-icon [tech]="item" class="h-5 w-5 p-0.5" />
+                                    {{ item.label }}
+                                </span>
+                            }
+                            @if (project.techs.length > 5) {
+                                <span class="rounded-full border border-white/10 bg-white/5 px-2.5 py-0.5 text-xs text-gray-300">+{{ project.techs.length - 5 }}</span>
+                            }
+                        </div>
+                        <span class="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-cyan-300">
+                            Ver proyecto
+                            <svg class="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </span>
+                    </div>
+                </a>
+            }
+        </section>
+
+        <div class="mt-12 flex justify-center px-4">
+            <a routerLink="/proyectos" class="w-full sm:w-64 py-4 px-6 bg-gradient-to-r from-blue-600 to-blue-800 text-white rounded-xl hover:from-blue-700 hover:to-blue-900 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 active:translate-y-0 active:shadow-lg active:bg-blue-800 active:from-blue-600 active:to-blue-800 cursor-pointer">
+                <span class="flex items-center justify-center">
+                    Ver todos los proyectos
+                    <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </span>
+            </a>
+        </div>
+    </div>
+</section>
+

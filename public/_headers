@@ -1,0 +1,16 @@
+# Netlify: https://docs.netlify.com/routing/headers/
+# Todos los .js y .css de la build llevan hash en el nombre (outputHashing: all), así que pueden cachearse para siempre.
+/*.js
+  Cache-Control: public, max-age=31536000, immutable
+/*.css
+  Cache-Control: public, max-age=31536000, immutable
+
+# Imágenes (public/images/**) y favicon mantienen su nombre al cambiar: caché de 1 día y revalidación en segundo plano.
+/images/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+/favicon.png
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin

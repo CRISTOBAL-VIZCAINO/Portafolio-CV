@@ -1,0 +1,38 @@
+---
+description: Contexto general del portafolio, estructura y reglas que aplican a cualquier cambio
+globs:
+alwaysApply: true
+---
+
+# Portafolio CV — reglas generales
+
+Portafolio personal de Cristóbal Vizcaíno: Angular 19 (standalone, OnPush, signals) + Tailwind CSS 4, 3 páginas, formulario de contacto que guarda en Supabase (API REST, sin SDK), desplegado en Netlify. La fuente de verdad de la arquitectura es @docs/ARQUITECTURA.md; si esta regla y ese documento discrepan, manda el documento y hay que corregir ambos.
+
+## Estructura (dónde va cada cosa)
+
+- `src/app/layout/` — navbar + `<router-outlet>` + footer, común a todas las páginas.
+- `src/app/pages/<página>/` — una carpeta por ruta. Lo que solo usa una página (componentes, servicios, tipos) vive en su carpeta.
+- `src/app/shared/` — solo lo que usan 2 o más páginas de verdad (hoy: `tech-icon.component.ts`, `motion.ts`).
+- `src/app/data/` — contenido tipado (proyectos, habilidades, catálogo de tecnologías y `models.ts`). Los textos se editan aquí, no en el HTML.
+- `src/environments/environment.ts` — solo configuración pública (URL y clave `anon` de Supabase).
+- `public/images/{profile,projects/<proyecto>,technologies}/` — imágenes WebP y logos SVG.
+- `docs/` — documentación. `src/` es solo código que se compila.
+- No crees `core/`, carpetas vacías ni abstracciones "por si acaso": el proyecto es pequeño a propósito.
+
+## Comandos
+
+- `npm start` — desarrollo en http://localhost:4200
+- `npm run build` — producción en `dist/portafolio-cjvm` (aplica presupuestos de tamaño)
+- `npm test` — Karma + Jasmine. En Linux: `CHROME_BIN=/usr/bin/google-chrome-stable npx ng test --watch=false --browsers=ChromeHeadless`
+- `npm run images` — convierte PNG/JPG de `public/images/` a WebP
+
+## Reglas que no se rompen
+
+- **El repositorio es público.** Nada de secretos, documentos internos de empleadores ni capturas con nombres de clientes, compañeros o identificadores internos sin difuminar. Los materiales privados van en `docs/fuentes-locales/` (ignorada por Git).
+- **URLs públicas:** `/`, `/proyectos` (anclas `#id-del-proyecto`) y `/contacto`, más el PDF `CV_Cristobal_Vizcaino.pdf`. Las antiguas (`/menuNavbar/aboutMePag1`, `/menuNavbar/proyectsPag2`, `/menuNavbar/contactPag3`) siguen publicadas en el CV: sus redirecciones en `public/_redirects` (301) y en `LEGACY_REDIRECTS` (`app.routes.ts`) no se quitan. Cambiar una URL pública exige añadir su redirección en ambos sitios y actualizar `sitemap.xml`.
+- **Sin recursos de terceros en tiempo de ejecución** (CDN, fuentes, scripts). Los logos se copian a `public/images/technologies/`.
+- **Sin dependencias nuevas** sin justificarlas y comparar `Initial total` de `npm run build` antes y después (presupuesto de aviso: 400 kB brutos).
+- **Conserva el diseño y el comportamiento** salvo que haya un defecto concreto.
+- **La documentación se actualiza en el mismo cambio** que el código que describe (ver la regla de documentación).
+- **No hagas commit, push ni despliegues** sin que el usuario lo pida.
+- **Verifica antes de afirmar:** compila, ejecuta las pruebas y, si tocas la UI, revísala en el navegador. No declares algo terminado sin evidencia.

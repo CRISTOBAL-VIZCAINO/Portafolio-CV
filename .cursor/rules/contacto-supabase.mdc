@@ -1,0 +1,18 @@
+---
+description: Reglas del formulario de contacto y de la integración con Supabase
+globs: src/app/pages/contact/**, src/environments/**
+alwaysApply: false
+---
+
+# Formulario de contacto y Supabase
+
+Detalle, SQL y estado verificado en @docs/ARQUITECTURA.md (§6).
+
+- `ContactService` hace `POST {url}/rest/v1/contact_messages` con `fetch`, la clave pública `anon` en `apikey` y `Authorization: Bearer`, `Content-Type: application/json` y `Prefer: return=minimal`. No reintroduzcas `@supabase/supabase-js` (~200 kB).
+- `Prefer: return=minimal` es necesario: RLS no deja a `anon` leer filas.
+- El cuerpo lleva exactamente `full_name`, `email`, `company`, `phone`, `subject`, `message` (tipo `ContactMessageInsert`); los opcionales vacíos se envían como `null`; el correo en minúsculas y los textos con `trim()`.
+- Límite de 15 s con `AbortSignal.timeout`. Ante cualquier respuesta no `ok`, error de red o timeout se muestra el mensaje de error, nunca el de éxito.
+- `onSubmit()` ignora nuevos envíos mientras `sending()` es `true`; con errores marca todo como tocado y lleva el foco al primer campo inválido (cada control tiene un input con su mismo `id`).
+- Las longitudes máximas (`MAX_LENGTH`) deben coincidir con la política SQL documentada.
+- **Seguridad:** la clave `anon` es pública por diseño; la protección real es RLS en Supabase. Nunca pongas `service_role` ni otro secreto en `src/environments/` ni en ningún archivo del frontend.
+- **Producción:** no envíes datos reales a Supabase en pruebas sin autorización explícita. Las pruebas unitarias simulan `fetch`; las de navegador interceptan la petición (respondiendo también el preflight CORS).
